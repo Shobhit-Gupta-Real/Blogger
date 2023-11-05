@@ -13,3 +13,8 @@ app.post('/signup', (req,res)=>{
 app.listen(4000, ()=>{
     console.log(`server 4000 is ready!`)
 })
+
+
+//mongodb+srv://blog:sajcGJ2GSTke1jhh@cluster0.cnqeahp.mongodb.net/?retryWrites=true&w=majority
+//database username: blog
+//database password : sajcGJ2GSTke1jhh

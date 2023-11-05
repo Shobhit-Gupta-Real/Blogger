@@ -100,4 +100,9 @@ button{
   border: 1px solid lightblue;
   border-radius: 8px;
 }
-
+button:hover{
+  background-color: rgb(126, 205, 255);
+}
+button:focus{
+  background-color: rgb(255, 149, 122);
+}
