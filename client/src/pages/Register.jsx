@@ -11,11 +11,17 @@ function Register() {
     the promise will fail as no responce will be there.
     There we need to work with both backend and frontend simultanousely*/
 
-    await fetch('http://localhost:4000/signup',{
+    const response = await fetch('http://localhost:4000/signup',{
       method: 'POST',
       body: JSON.stringify({username, password}),
       headers: {'Content-Type':'application/json'},
     })
+    if(response.status === 200){
+      alert('Signed Up !')
+    }else{
+      alert('Registration Failed...')
+      console.log()
+    }
   }
   return (
     <div>

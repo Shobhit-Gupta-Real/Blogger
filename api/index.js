@@ -1,13 +1,45 @@
 const express = require('express')
-const cors = require('cors')
+const cors = require('cors') //for transfer of data between platform of different origin
+const bcrypt = require('bcryptjs') //for authentication
+const salt = bcrypt.genSaltSync(10) //some random string to randominze the hashing process
+//here 10 in bcrypt is that 10 rounds of hashing will take place by default it is 10
+const jwt = require('jsonwebtoken')
+const secret = 'asdfjkjlj3453' //secret code for jsonwebtoken
+const { default: mongoose } = require('mongoose')
+const Usermodel = require('./models/User')
 const app = express()
 
 app.use(cors())
 app.use(express.json()) //express json parser to convert data from json to object
 
-app.post('/signup', (req,res)=>{
+//database connection
+mongoose.connect('mongodb+srv://blog:sajcGJ2GSTke1jhh@cluster0.cnqeahp.mongodb.net/?retryWrites=true&w=majority')
+
+app.post('/signup', async(req,res)=>{
     const {username, password} = req.body //the data will come in the req.body
-    res.json({requestData:{username, password}})
+    try{
+        const userDoc = await Usermodel.create({
+            username,
+            password:bcrypt.hashSync(password, salt),
+        })
+        res.json(userDoc)
+    }catch(e){
+        res.status(400).json(e)
+    }
+    
+})
+app.post('/login', async(req,res)=>{
+    const {username, password} = req.body
+    const userDoc = await Usermodel.findOne({username})
+    const passOk = bcrypt.compareSync(password, userDoc.password)
+    if(passOk){
+        jwt.sign({username, id:userDoc._id}, secret, {}, (err, token)=>{
+            if(err) throw err;
+            res.cookie('token', token).json('ok')
+        })
+    }else{
+        res.status(400).json('Wrong credentials')
+    }
 })
 
 app.listen(4000, ()=>{
