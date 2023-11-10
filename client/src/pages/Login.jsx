@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {Navigate} from 'react-router-dom'
+import { UserContext } from '../context/UserConstext'
 
 function Login() {
   const [username, setUsername] = useState('')
   const [password, setPassword] =  useState('')
   const [redirect, setRedirect] = useState(false)//for redirecting to homepage after login
+  const {userInfo, setUserInfo} = useContext(UserContext)
   async function Logging(ev){
     ev.preventDefault()
     const response = await fetch('http://localhost:4000/login', {
@@ -14,7 +16,11 @@ function Login() {
       credentials: 'include' //this will include the cookie on our request and our cookie contains the jwt token for authorization
     })
     if(response.ok){
-      setRedirect(true)
+      response.json().then(userInfo=>{
+        setUserInfo(userInfo)
+        setRedirect(true)
+      })
+      
     }else{
       alert('Wrong credentials')
     }
@@ -26,7 +32,7 @@ function Login() {
   return (
     <div className='login_box'>
       <form action="" className='login' onSubmit={Logging}>
-        <h1>LogIn</h1>
+        <h1 className='dark:text-slate-300' style={{alignSelf:'center', marginBottom:'15px'}}>LogIn</h1>
         <input type="text" placeholder='username' value={username} 
         onChange={e => setUsername(e.target.value)}/>
         <input type="password" placeholder='password' value={password} 

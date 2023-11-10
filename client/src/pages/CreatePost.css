@@ -1,0 +1,65 @@
+.ql-container{
+    font-size: 28px !important;
+}
+.quill > .ql-container > .ql-editor.ql-blank::before{
+    color: #b3b3b1;
+}
+
+.container{
+    
+}
+.title{
+    padding: 50px;
+    font-size: 54px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+.title::placeholder{
+    color: #b3b3b1;
+}
+.editor{
+    display: flex;
+    gap: 20px;
+    height: 700px;
+    position: relative;
+}
+.button{
+    
+}
+.textArea{
+    width: 100%;
+    margin-top: 50px;
+}
+.button, .addButton{
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.add{
+    display: flex;
+    gap: 20px;
+    position: absolute;
+    z-index: 999;
+    width: 100%;
+    left: 50px;
+}
+.publish{
+    position: absolute;
+    bottom: 50px;
+    right: 100px;
+    padding: 10px 25px;
+    font-size: 1.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a8917;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}

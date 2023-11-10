@@ -1,7 +1,6 @@
 @tailwind components;
 @tailwind utilities;
 @tailwind base;
-
 body{
     color: #222;
     padding: 10px;
@@ -20,6 +19,7 @@ body{
   header a.logo{
     font-size: xx-large;
     font-weight: bold;
+    padding-left: 5.5em;
   }
   header nav{
     display: flex;
@@ -37,6 +37,7 @@ body{
   .inspire img{
     height: 430px;
     width: 120em;
+    border-radius: 8%;
     margin-bottom: 20px;
   }
   .inspire{
@@ -74,6 +75,8 @@ body{
   }
   .post_content p{
     line-height: 1.3rem;
+    font-size: 18px;
+    margin-top: 10px;
   }
   .info{
     display: flex;
@@ -120,4 +123,5 @@ body{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-style: italic;
   }
+  
   

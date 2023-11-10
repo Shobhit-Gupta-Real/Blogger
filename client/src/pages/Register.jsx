@@ -26,7 +26,7 @@ function Register() {
   return (
     <div>
       <form onSubmit={Register} className='register'>
-        <h1>SignUp</h1>
+        <h1 className='dark:text-slate-300' style={{alignSelf:'center', marginBottom:'15px'}}>SignUp</h1>
         <input type="text"
          placeholder='username'
          value={username}
