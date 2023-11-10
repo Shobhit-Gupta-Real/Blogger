@@ -17,7 +17,7 @@ function Home() {
             <button>Read More</button>
             </div>
           </div>
-          <h1>Recent Posts</h1>
+          <h1>Recent Post</h1>
           <Post/>
     </>
   )

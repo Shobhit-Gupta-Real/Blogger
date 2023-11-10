@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import ThemeBtn from '../components/ThemeBtn'
 
 function Nav() {
   const [username, setUsername] = useState(null)
@@ -33,6 +34,7 @@ function Nav() {
       </span>
       <a href="" className='logo'>Blogger</a>
       <nav>
+        <ThemeBtn/>
         <Link to="/">HomePage</Link>
         <Link to="">Contact </Link>
         {username &&(

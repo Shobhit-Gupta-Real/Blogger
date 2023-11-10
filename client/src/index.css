@@ -1,0 +1,123 @@
+@tailwind components;
+@tailwind utilities;
+@tailwind base;
+
+body{
+    color: #222;
+    padding: 10px;
+    max-width: 70vw;
+    margin: 10px 210px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+  header{
+    display: flex;
+    justify-content: space-between;
+  }
+  a{
+    text-decoration: none;
+    color: inherit;
+  }
+  header a.logo{
+    font-size: xx-large;
+    font-weight: bold;
+  }
+  header nav{
+    display: flex;
+    gap: 15px;
+  }
+  .social{
+    display: flex;
+    gap: 10px;
+    height: 25px;
+  }
+  .heading{
+    margin: 60px 0;
+    font-size: 80px;
+  }
+  .inspire img{
+    height: 430px;
+    width: 120em;
+    margin-bottom: 20px;
+  }
+  .inspire{
+    display: flex;
+    gap: 50px;
+  }
+  .inspire_text b{
+    font-size: xx-large;
+  }
+  .inspire_text{
+    padding-top: 5em;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: baseline;
+  }
+ h1{
+    font-size: xx-large;
+    font-weight: bolder;
+    display: block;
+ }
+  .post{
+    display: flex;
+    margin: 30px auto;
+    gap: 50px;
+  }
+  .post img{
+    width: 55%;
+    height: auto;
+  }
+  .post_content h2{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 2.3em;
+  }
+  .post_content p{
+    line-height: 1.3rem;
+  }
+  .info{
+    display: flex;
+    gap: 20px;
+    font-size: medium;
+    color: #888;
+    font-weight: bold;
+  }
+  .info a{
+    color: #333;
+  }
+  form.login, form.register{
+    max-width: 400px;
+    margin: 10em auto;
+    display: flex;
+    flex-direction: column;
+  }
+  input{
+    box-sizing: border-box;
+    display: block;
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 8px 13px;
+    font-size: larger;
+    border: 2px solid #ddd;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+  button{
+    display: block;
+    padding: 10px;
+    font-size: medium;
+    background-color: rgb(161, 228, 255);
+    border: 1px solid lightblue;
+    border-radius: 8px;
+  }
+  button:hover{
+    background-color: rgb(126, 205, 255);
+  }
+  button:focus{
+    background-color: rgb(255, 149, 122);
+  }
+  .blog_item{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-style: italic;
+  }
+  
