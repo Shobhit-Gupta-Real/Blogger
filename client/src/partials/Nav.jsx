@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import ThemeBtn from '../components/ThemeBtn'
 import { UserContext } from '../context/UserConstext'
 
 function Nav() {
+  const [redirect, setRedirect] = useState(false)
   const {setUserInfo, userInfo} = useContext(UserContext)
   useEffect(()=>{
     fetch('http://localhost:4000/profile',{
@@ -15,14 +16,16 @@ function Nav() {
     })
   },[])
 
-  function logout(){
-    fetch('http://localhost:4000/logout',{
+  async function logout(){
+    const gone = await fetch('http://localhost:4000/logout',{
       credentials: 'include',
       method: 'POST',
     })
     setUserInfo(null)
+    if(gone.ok){
+      setRedirect(true)
   }
-
+  }
   const username = userInfo?.username
   return (
     <div>
@@ -32,15 +35,15 @@ function Nav() {
       <img src="/images/facebook.png" alt="" />
       <img src="/images/instagram.png" alt="" />
       <img src="/images/youtube.png" alt="" />
-      <img src="/images/tiktok.png" alt="" />
+      <img src="/images/tiktok.png" alt="" className='tiktok dark:bg-white'/>
       </span>
       <Link to="/" className='logo dark:text-white'>Blogger</Link>
       <nav className='dark:text-white'>
         <ThemeBtn/>
         <Link to="/">HomePage</Link>
-        <Link to="">Contact </Link>
         {username &&(
           <>
+            <span>Hello, {username}</span>
             <Link to="/create" className='blog_item'>NEW-BLOG</Link>
             <Link onClick={logout}>LogOut</Link>
           </>

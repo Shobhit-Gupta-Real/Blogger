@@ -12,6 +12,8 @@ import Register from './pages/Register'
 import { ThemeProvider } from './context/theme'
 import { UserContextProvider } from './context/UserConstext'
 import CreatePost from './pages/CreatePost'
+import PostPage from './pages/PostPage'
+import EditPage from './pages/EditPage'
 
 function App() {
   const bgcolor = "white"
@@ -40,6 +42,8 @@ function App() {
       <Route path='/login' element={<Login/>} />
       <Route path='/signup' element={<Register/>}/>
       <Route path='/create' element={<CreatePost/>}/>
+      <Route path='/post/:id' element={<PostPage/>}/>
+      <Route path='/edit/:id' element={<EditPage/>}/>
       </Route>
     </Routes>
     </UserContextProvider>

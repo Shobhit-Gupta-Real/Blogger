@@ -5,7 +5,7 @@ body{
     color: #222;
     padding: 10px;
     max-width: 70vw;
-    margin: 10px 210px;
+    margin: 10px 220px;
     font-family: 'Times New Roman', Times, serif;
   }
   header{
@@ -67,7 +67,11 @@ body{
   }
   .post img{
     width: 55%;
-    height: auto;
+    max-height: 300px;
+    overflow: hidden;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid;
   }
   .post_content h2{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -76,7 +80,7 @@ body{
   .post_content p{
     line-height: 1.3rem;
     font-size: 18px;
-    margin-top: 10px;
+    margin: 20px 0;
   }
   .info{
     display: flex;
@@ -124,4 +128,57 @@ body{
     font-style: italic;
   }
   
+.tiktok{
+  border-radius: 50%;
+}
+
+div.post-page div.image{
+  max-height: 330px;
+  display: flex;
+  overflow: hidden;
+}
+div.post-page div.image img{
+  object-fit: cover;
+  width: 100%;
+  padding: 20px;
+}
+div.post-page a{
+  color: #333;
+  text-decoration: underline;
+}
+div.post-page h1{
   
+}
+div.post-page time{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-top: 20px;
+}
+div.post-page nav{
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+div.post-page div.author{
+  text-align: center;
+  margin-top: 8px;
+  font-size: large;
+  font-family: cursive;
+}
+div.post-page div.content p{
+  line-height: 1.6rem;
+}
+div.edit-row{
+  text-align: center;
+}
+div.post-page .edit-btn{
+  background-color: #333;
+  color: white;
+  padding: 15px 30px;
+  text-decoration: none;
+  display: inline-flex;
+  gap: 5px;
+  margin-top: 10px;
+}
+.edit-btn svg{
+  height: 20px;
+}

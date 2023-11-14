@@ -5,11 +5,9 @@
     color: #b3b3b1;
 }
 
-.container{
-    
-}
+
 .title{
-    padding: 50px;
+    padding: 20px 30px;
     font-size: 54px;
     border: none;
     outline: none;
@@ -17,6 +15,14 @@
 }
 .title::placeholder{
     color: #b3b3b1;
+}
+.summary{
+    outline: none;
+    border: none;
+    padding: 0 30px;
+    background-color: transparent;
+    font-size: 30px;
+    padding-bottom: 20px;
 }
 .editor{
     display: flex;
@@ -29,32 +35,20 @@
 }
 .textArea{
     width: 100%;
-    margin-top: 50px;
+    margin-top: 10px;
 }
-.button, .addButton{
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background-color: transparent;
-    border: 1px solid black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-.add{
-    display: flex;
-    gap: 20px;
-    position: absolute;
-    z-index: 999;
-    width: 100%;
-    left: 50px;
+.file_input{
+    background: transparent;
+    border: 1px solid rgb(212, 212, 212);
+    margin: 0;
+    font-size: medium;
+    padding: 10px;
 }
 .publish{
-    position: absolute;
-    bottom: 50px;
-    right: 100px;
-    padding: 10px 25px;
+    position: fixed;
+    bottom: 20px;
+    right: 11em;
+    padding: 8px 20px;
     font-size: 1.5rem;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #1a8917;

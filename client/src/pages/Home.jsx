@@ -1,7 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Post from '../seed/Post'
 
+
+
 function Home() {
+  const [posts, setPosts] = useState([])
+
+  useEffect(()=>{
+    fetch('http://localhost:4000/post').then(response =>{
+      response.json().then(posts =>{
+        setPosts(posts)
+      })
+    })
+  }, [])
   return (
     <>
         <div className="heading dark:text-slate-300">
@@ -18,7 +29,9 @@ function Home() {
             </div>
           </div>
           <h1>Recent Post</h1>
-          <Post/>
+         {posts.length > 0 && posts.map(post =>(
+            <Post {...post}/>
+         ))} 
     </>
   )
 }
