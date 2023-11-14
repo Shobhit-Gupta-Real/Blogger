@@ -4,7 +4,6 @@ import ThemeBtn from '../components/ThemeBtn'
 import { UserContext } from '../context/UserConstext'
 
 function Nav() {
-  const [redirect, setRedirect] = useState(false)
   const {setUserInfo, userInfo} = useContext(UserContext)
   useEffect(()=>{
     fetch('http://localhost:4000/profile',{
@@ -22,9 +21,6 @@ function Nav() {
       method: 'POST',
     })
     setUserInfo(null)
-    if(gone.ok){
-      setRedirect(true)
-  }
   }
   const username = userInfo?.username
   return (
