@@ -182,3 +182,8 @@ div.post-page .edit-btn{
 .edit-btn svg{
   height: 20px;
 }
+.content{
+  font-size: 2rem;
+  margin-top: 20px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
