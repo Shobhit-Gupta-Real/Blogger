@@ -28,7 +28,7 @@ function Home() {
             <button className='dark:text-black dark:border-black'>Read More</button>
             </div>
           </div>
-          <h1>Recent Post</h1>
+          {posts.length>0?<h1>Recent Post</h1>:""}
          {posts.length > 0 && posts.map(post =>(
             <Post {...post}/>
          ))} 

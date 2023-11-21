@@ -119,6 +119,12 @@ app.post('/post', uploadMiddleware.single('file') ,async (req,res)=>{
     })
    
 })
+app.post('/delete/:id', async(req,res)=>{
+    const {id} = req.params
+    const postDoc = await PostModel.findByIdAndDelete(id)
+    res.json(postDoc)
+})
+
 app.get('/post/:id', async(req,res)=>{
     const {id} = req.params
     const postDoc = await PostModel.findById(id).populate('author', ['username'])
