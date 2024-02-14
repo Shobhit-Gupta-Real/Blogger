@@ -10,7 +10,7 @@ const { default: mongoose } = require('mongoose')
 const Usermodel = require('./models/User')
 const PostModel = require('./models/Post')
 const app = express()
-const multer = require('multer')
+const multer = require('multer') //it is a middleware for handling file uploads.
 const uploadMiddleware = multer({dest: 'uploads/'})
 const fs = require('fs')
 const { isAbsolute } = require('path')
@@ -41,7 +41,10 @@ app.post('/login', async(req,res)=>{
     const userDoc = await Usermodel.findOne({username})
     const passOk = bcrypt.compareSync(password, userDoc.password)
     if(passOk){
-        jwt.sign({username, id:userDoc._id}, secret, {}, (err, token)=>{
+        jwt.sign({username, id:userDoc._id}, //payload
+            secret,//secret key
+            {},//here you can set the properties like expiration time of the token and algorithm etc.
+            (err, token)=>{ //call back function after the token is generated
             if(err) throw err;
             res.cookie('token', token).json({
                 id:userDoc._id,
@@ -98,7 +101,7 @@ app.put('/post', uploadMiddleware.single('file'), async(req,res)=>{
     res.json(postDoc)
     })
 })
-app.post('/post', uploadMiddleware.single('file') ,async (req,res)=>{
+app.post('/post', uploadMiddleware.single('file'), async (req,res)=>{
     const {originalname, path} = req.file
     const parts = originalname.split('.')
     const ext = parts[parts.length -1]
@@ -107,7 +110,7 @@ app.post('/post', uploadMiddleware.single('file') ,async (req,res)=>{
     const {token} = req.cookies
     jwt.verify(token, secret, {}, async(err, info)=>{ //it will verfy our token
         if(err) throw err
-        const {title, summary, content} = req.body
+    const {title, summary, content} = req.body
     const postDoc = await PostModel.create({
     title,
     summary,

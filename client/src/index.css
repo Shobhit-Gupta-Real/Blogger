@@ -66,7 +66,7 @@ body{
     gap: 50px;
   }
   .post img{
-    width: 55%;
+    min-width: 35rem;
     max-height: 300px;
     overflow: hidden;
     object-fit: cover;
@@ -81,6 +81,7 @@ body{
     line-height: 1.3rem;
     font-size: 18px;
     margin: 20px 0;
+    
   }
   .info{
     display: flex;
@@ -183,7 +184,11 @@ div.post-page .edit-btn{
   height: 20px;
 }
 .content{
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-top: 20px;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  letter-spacing: 1px;
 }
