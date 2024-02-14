@@ -48,7 +48,7 @@ Edit this post</Link>
           </div>
         )}
         <div className="image">
-      <img src={`http://localhost:4000/${postInfo.cover}`} />
+      <img src={postInfo.cover.url} />
     </div>
     <div className='content dark:text-white' dangerouslySetInnerHTML={{__html:postInfo.content}}/> 
         {/* the about line is to set the content display in the html form because by default it shows in the string form */}

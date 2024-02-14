@@ -5,7 +5,10 @@ const PostSchema = new Schema({
     title: String,
     summary: String,
     content: String,
-    cover:String,
+    cover:{
+        url: String,
+        filename: String
+    },
     author:{
         type:Schema.Types.ObjectId,
         ref:'User'

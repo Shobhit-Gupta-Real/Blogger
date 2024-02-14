@@ -6,7 +6,7 @@ function Post({title, summary, cover, content, createdAt, author, _id}) {
   return (
     <div>
       <div className="post dark:text-white"> 
-      <img src={'http://localhost:4000/'+cover} alt="" />
+      <img src={cover.url} alt="" />
       <div className="post_content">
       <h2 className='dark:text-slate-400'>{title}</h2>
       <div className="info">

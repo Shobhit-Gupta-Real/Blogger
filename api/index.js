@@ -1,19 +1,20 @@
 const express = require('express')
+require('dotenv').config()
 const cors = require('cors') //for transfer of data between platform of different origin
 const bcrypt = require('bcryptjs') //for authentication
 const salt = bcrypt.genSaltSync(10) //some random string to randominze the hashing process
 //here 10 in bcrypt is that 10 rounds of hashing will take place by default it is 10
 const jwt = require('jsonwebtoken')
-const secret = 'asdfjkjlj3453' //secret code for jsonwebtoken
+const secret = process.env.SECRET //secret code for jsonwebtoken
 const cookieParser = require('cookie-parser')//for parsing the cookie data to know that the user is loged in or not
 const { default: mongoose } = require('mongoose')
 const Usermodel = require('./models/User')
 const PostModel = require('./models/Post')
 const app = express()
+const cloudinary = require('cloudinary').v2
 const multer = require('multer') //it is a middleware for handling file uploads.
-const uploadMiddleware = multer({dest: 'uploads/'})
-const fs = require('fs')
-const { isAbsolute } = require('path')
+const {blogImg} = require('./cloudinary/post')
+const blogUpload = multer({storage: blogImg})
 
 app.use('/uploads',express.static(__dirname+'/uploads'))
 app.use(cors({credentials:true, origin:'http://localhost:5173'})) //for allowing the credentials originated from the react localhost
@@ -21,7 +22,7 @@ app.use(express.json()) //express json parser to convert data from json to objec
 app.use(cookieParser())
 
 //database connection
-mongoose.connect('mongodb+srv://blog:sajcGJ2GSTke1jhh@cluster0.cnqeahp.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect(process.env.MONGOOSE_CONNECT)
 
 app.post('/signup', async(req,res)=>{
     const {username, password} = req.body //the data will come in the req.body
@@ -77,14 +78,12 @@ app.get('/post', async(req,res)=>{
     // here we have given username in the array becauser we want only username from the userinfo and not anything else
     res.json(Posts)
 })
-app.put('/post', uploadMiddleware.single('file'), async(req,res)=>{
-    let newPath = null
+app.put('/post', blogUpload.single('file'), async(req,res)=>{
+    let image = null
     if(req.file){
-    const {originalname, path} = req.file
-    const parts = originalname.split('.')
-    const ext = parts[parts.length -1]
-    newPath = path+'.'+ext
-    fs.renameSync(path, newPath)
+    const uploading = req.file
+    console.log(uploading)
+    image = {url: uploading.path, filename: uploading.filename}
     }
     const {token} = req.cookies
     jwt.verify(token, secret, {}, async(err, info)=>{ //it will verfy our token
@@ -95,18 +94,19 @@ app.put('/post', uploadMiddleware.single('file'), async(req,res)=>{
     if(!iSAuthor){
        return res.status(400).json('You are not the author')
     }
+    if(image){
+        const imgId = postDoc.cover.filename
+        await cloudinary.uploader.destroy(imgId)
+    }
     await postDoc.updateOne({title, summary, content,
-    cover:newPath?newPath:postDoc.cover})
-
+    cover:image?image:postDoc.cover})
     res.json(postDoc)
     })
 })
-app.post('/post', uploadMiddleware.single('file'), async (req,res)=>{
-    const {originalname, path} = req.file
-    const parts = originalname.split('.')
-    const ext = parts[parts.length -1]
-    fs.renameSync(path, path+'.'+ext)
-
+app.post('/post', blogUpload.single('file'), async (req,res)=>{
+    const uploading = req.file
+    console.log(uploading)
+    const image = {url: uploading.path, filename: uploading.filename}
     const {token} = req.cookies
     jwt.verify(token, secret, {}, async(err, info)=>{ //it will verfy our token
         if(err) throw err
@@ -115,7 +115,7 @@ app.post('/post', uploadMiddleware.single('file'), async (req,res)=>{
     title,
     summary,
     content,
-    cover: path+'.'+ext,
+    cover: image,
     author:info.id,
    })
    res.json({postDoc})
@@ -124,8 +124,11 @@ app.post('/post', uploadMiddleware.single('file'), async (req,res)=>{
 })
 app.post('/delete/:id', async(req,res)=>{
     const {id} = req.params
-    const postDoc = await PostModel.findByIdAndDelete(id)
-    res.json(postDoc)
+    const postDoc = await PostModel.findById(id)
+    const imgId = postDoc.cover.filename
+    await cloudinary.uploader.destroy(imgId)
+    const post = await PostModel.findByIdAndDelete(id)
+    res.json(post)
 })
 
 app.get('/post/:id', async(req,res)=>{
@@ -137,8 +140,3 @@ app.get('/post/:id', async(req,res)=>{
 app.listen(4000, ()=>{
     console.log(`server 4000 is ready!`)
 })
-
-
-//mongodb+srv://blog:sajcGJ2GSTke1jhh@cluster0.cnqeahp.mongodb.net/?retryWrites=true&w=majority
-//database username: blog
-//database password : sajcGJ2GSTke1jhh
